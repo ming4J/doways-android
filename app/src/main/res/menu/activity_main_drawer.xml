@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_checkin"
+
+            android:icon="@drawable/ic_menu_sign"
+            android:title="@string/menu_checkin" />
+        <item
+            android:id="@+id/nav_cancellation"
+            android:icon="@drawable/ic_menu_clear_leave"
+            android:title="@string/menu_cancellation" />
+        <item
+            android:id="@+id/nav_appjq"
+            android:icon="@drawable/ic_menu_leave"
+            android:title="@string/menu_appholiday" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_logout"
+            android:title="@string/menu_exit" />
+    </group>
+    <item android:title="我的备忘录">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_all"
+                    android:icon="@drawable/ic_menu_all"
+                    android:title="所有备忘录" />
+                <item
+                    android:id="@+id/nav_finish"
+                    android:icon="@drawable/ic_menu_finish"
+                    android:title="已完成备忘录" />
+                <item
+                    android:id="@+id/nav_unfinish"
+                    android:icon="@drawable/ic_menu_unfinish"
+                    android:title="未完成备忘录" />
+            </group>
+        </menu>
+    </item>
+
+</menu>

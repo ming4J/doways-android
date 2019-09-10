@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activity.MainActivity"
+
+    android:fillViewport="true"
+
+    >
+
+    <ScrollView
+        android:background="@color/grey_200"
+        android:id="@+id/scrollv"
+        android:layout_weight="100"
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/main_frame"
+
+            >
+
+
+        </FrameLayout>
+
+
+    </ScrollView>
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_weight="1"
+        android:id="@+id/bv_bottomNavigation"
+        android:layout_width="match_parent"
+        app:labelVisibilityMode="labeled"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+
+        app:itemIconTint="@drawable/bottom_navigation_item_selector"
+        app:itemTextColor="@drawable/bottom_navigation_item_selector"
+        app:menu="@menu/main_bottom_navigation" />
+
+
+</LinearLayout>
+
+
+
+
