@@ -51,12 +51,12 @@ public class DestoryinFragment extends Fragment {
         startNumberList = new ArrayList();
         leaveDateList = new ArrayList();
         leaveReasonList = new ArrayList();
-        //  Log.e("dededededede","dededededededede");
+          Log.e("dededededede","dededededededede");
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //  Log.e("urlurl", BaseRequest.BASEURL + "users/"
-                //          + app.getStuid() + "/leave/");
+                  Log.e("urlurl", BaseRequest.BASEURL + "users/"
+                          + app.getStuid() + "/leave/");
                 OkHttpUtils.get().addHeader("Authorization", "Bearer " + app.getToken()).url(BaseRequest.BASEURL + "users/"
                         + app.getStuid() + "/leave/").build().execute(new StringCallback() {
                     @Override

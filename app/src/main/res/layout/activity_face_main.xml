@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent">
 
     <SurfaceView
@@ -26,13 +25,21 @@
         android:src="@mipmap/bg_frame_face" />
 
     <ImageView
-        android:alpha="0.5"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="bottom"
+        android:background="@color/grey_600"
+        />
+    <ImageView
         android:id="@+id/test"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:gravity="bottom"
+        android:foreground="?android:attr/selectableItemBackground"
         android:src="@mipmap/icon_capture" />
 </RelativeLayout>

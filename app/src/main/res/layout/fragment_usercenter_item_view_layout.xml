@@ -5,6 +5,7 @@
     android:layout_height="50dp"
     android:layout_gravity="center_vertical"
     android:id="@+id/root_item"
+    android:foreground="?android:attr/selectableItemBackground"
     android:background="@android:color/white">
 
     <ImageView
@@ -23,8 +24,9 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/left_icon"
+        android:textStyle="bold"
         android:text="姓名"
-        android:textColor="#636363" />
+        android:textColor="@color/pure_black" />
 
     <ImageView
         android:id="@+id/right_arrow"
@@ -41,8 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_toLeftOf="@id/right_arrow"
+        android:textStyle="bold"
+        android:textSize="14dp"
         android:text="张三"
-        android:textColor="@color/textColor" />
+        android:textColor="@color/grey_600" />
 
     <ImageView
         android:id="@+id/bottom_line"

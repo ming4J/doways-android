@@ -6,13 +6,27 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:fitsSystemWindows="true"
-
     android:orientation="vertical"
     tools:ignore="RtlHardcoded,HardcodedText,RtlSymmetry,SmallSp">
-
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="60dp">
+<android.support.design.card.MaterialCardView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="3dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <RelativeLayout
-        android:layout_marginTop="@dimen/fragment_top"
         android:id="@+id/rl_tool"
         android:layout_width="match_parent"
         android:layout_height="52dp">
@@ -103,6 +117,7 @@
             android:layout_height="match_parent"
             android:background="#fff"
             app:calendar_padding="10dp"
+            android:layout_marginBottom="12dp"
             app:current_month_lunar_text_color="#CFCFCF"
             app:current_month_text_color="#333333"
             app:max_year="2020"
@@ -116,7 +131,7 @@
             app:scheme_theme_color="#128c4b"
             app:selected_lunar_text_color="#fff"
             app:selected_text_color="#fff"
-            app:selected_theme_color="#046cea"
+            app:selected_theme_color="#128c4b"
             app:week_background="#fff"
             app:week_start_with="sun"
             app:week_text_color="#e1e1e1"
@@ -131,9 +146,49 @@
             app:year_view_week_height="12dp"
             app:year_view_week_text_color="#e1e1e1"
             app:year_view_week_text_size="6sp" />
-
-
     </com.haibin.calendarview.CalendarLayout>
+    </LinearLayout>
+</android.support.design.card.MaterialCardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+        <android.support.design.card.MaterialCardView
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.NavigationView
+                android:id="@+id/cala_stu_trans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/menu_cala_2">
 
+            </android.support.design.widget.NavigationView>
+        </android.support.design.card.MaterialCardView>
 
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp">
+            <android.support.design.widget.NavigationView
+                android:id="@+id/cala_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/menu_cala">
+
+            </android.support.design.widget.NavigationView>
+
+        </android.support.design.card.MaterialCardView>
+    </LinearLayout>
+</LinearLayout>
 </LinearLayout>

@@ -160,8 +160,8 @@ public class CameraholidayActivity extends Activity {
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
                 Camera.Parameters parameters = camera.getParameters();
-                parameters.setPictureSize(320, 240);
-                parameters.getFocusMode();
+                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+                parameters.setPictureSize(640, 480);
                 parameters.setPictureFormat(PixelFormat.JPEG);
                 camera.setParameters(parameters);
                 //

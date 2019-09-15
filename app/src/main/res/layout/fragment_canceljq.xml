@@ -13,6 +13,7 @@
         android:id="@+id/tv_select_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/pure_black"
         android:text="选择请假日期"
         android:textSize="30dp"
 
@@ -29,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="第"
+            android:textColor="@color/pure_black"
             android:textSize="15dp"/>
         <Spinner
             android:id="@+id/startsp"
@@ -39,6 +41,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/pure_black"
             android:text="节至第"
             android:textSize="15dp"/>
         <Spinner
@@ -53,6 +56,7 @@
         android:textSize="15dp"/>
         <TextView
             android:layout_width="wrap_content"
+            android:textColor="@color/pure_black"
             android:layout_height="wrap_content"
             android:text="类型"
             android:textSize="15dp"/>
@@ -76,6 +80,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/pure_black"
         android:text="请假事由:"
         android:textSize="18dp"
         />

@@ -50,8 +50,12 @@ public class DestoryinAdapter extends BaseAdapter {
         }
         if (type.get(position).equals("事假")) {
             holder.tvtype.setTextColor(0xffe6b800);
-        } else {
-            holder.tvtype.setTextColor(0xffcc0000);
+        }else if (type.get(position).equals("病假")) {
+            holder.tvtype.setTextColor(0xffff9016);
+        }else if(type.get(position).equals("迟到")){
+            holder.tvtype.setTextColor(0xffff0000);
+        }else if(type.get(position).equals("旷课")){
+            holder.tvtype.setTextColor(0xff990000);
         }
         holder.tvtime.setText("" + time.get(position));
         holder.tvtype.setText("" + type.get(position));

@@ -170,6 +170,7 @@ public class Register_two_Fragment extends Fragment implements TextWatcher {
                                 e.printStackTrace();
                             }
 
+
                         }
                     });
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <item android:title="学生事务">
+        <menu>
+            <group>
+
+                <item
+                    android:id="@+id/cala_cancellation"
+                    android:icon="@drawable/ic_cala_leave"
+                    android:title="@string/menu_appholiday" />
+                <item
+                    android:id="@+id/cala_log"
+                    android:icon="@drawable/ic_cala_leave_log"
+                    android:title="@string/leave_log" />
+                <item
+                    android:id="@+id/cala_anys"
+                    android:icon="@drawable/ic_cala_any_class_sign"
+                    android:title="@string/any_class_sign"
+                    />
+
+            </group>
+        </menu>
+    </item>
+
+</menu>

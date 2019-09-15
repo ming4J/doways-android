@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:contentInsetStart="0dp"
+            app:contentInsetStart="30dp"
             android:layout_gravity="center"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 

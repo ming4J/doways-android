@@ -81,13 +81,18 @@ public class ApplicateFragment extends Fragment implements View.OnFocusChangeLis
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
-        Bundle bundle = data.getExtras();
-        picdata = bundle.getByteArray("bitmapdata");
+
+        try {
+            Bundle bundle = data.getExtras();
+            picdata = bundle.getByteArray("bitmapdata");
 //        Bitmap bitmap = bundle.getParcelableArray("bitmap");
-        if (imgupload != null) {
-            final Bitmap bm = BitmapFactory.decodeByteArray(picdata, 0, picdata.length);
-            imgupload.setImageBitmap(bm);
-            imgflag = true;
+            if (imgupload != null) {
+                final Bitmap bm = BitmapFactory.decodeByteArray(picdata, 0, picdata.length);
+                imgupload.setImageBitmap(bm);
+                imgflag = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -352,21 +357,12 @@ public class ApplicateFragment extends Fragment implements View.OnFocusChangeLis
 
                                             @Override
                                             public void onResponse(String response, int id) {
+                                                Log.e("ID",response);
                                                 Log.e("resresres", response + "");
                                                 try {
                                                     JSONObject responsedata = new JSONObject(response);
                                                     if (responsedata.getInt("code") == 200) {
                                                         JSONArray arrdata = responsedata.getJSONArray("data");
-                                                        if (arrdata.length() == 0) {
-                                                            getActivity().runOnUiThread(new Runnable() {
-                                                                @Override
-                                                                public void run() {
-                                                                    Toast.makeText(getActivity(), "这天没有课程安排哦～", Toast.LENGTH_SHORT).show();
-                                                                    kcidlength = -1;
-                                                                }
-                                                            });
-
-                                                        } else {
                                                             List haskcid = new ArrayList();
                                                             kcidlength = arrdata.length() - 1;
                                                             try {
@@ -407,7 +403,15 @@ public class ApplicateFragment extends Fragment implements View.OnFocusChangeLis
 
                                                                 }
                                                             });
-                                                        }
+
+                                                    }else {
+                                                        getActivity().runOnUiThread(new Runnable() {
+                                                            @Override
+                                                            public void run() {
+                                                                Toast.makeText(getActivity(), "这天没有课程安排哦～", Toast.LENGTH_SHORT).show();
+                                                                kcidlength = -1;
+                                                            }
+                                                        });
                                                     }
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();

@@ -112,7 +112,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                             double distanceforclassroom = Double.parseDouble(result[3]);
                             final int timeid = msg.arg2;
                             //   Log.e("distance",distanceforclassroom+"");
-                            if (distanceforclassroom > 10) {
+                            if (distanceforclassroom > 7) {
                                 Toast.makeText(context, "当前距离教室" + (float) distanceforclassroom + "m不能发起签到请求", Toast.LENGTH_SHORT).show();
 
                             } else {
@@ -185,18 +185,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             //holder.cardView.setBackgroundColor(Color.argb(12, 50, 160, 0));
             //holder.cardView.setCardBackgroundColor(Color.argb(242,255,229,0));
             holder.tvcoursestatus.setTextColor(R.color.account_pressed_true);
-            holder.cardImage.setImageResource(R.mipmap.form_checkbox_checked);
+            holder.cardImage.setImageResource(R.mipmap.ic_ing);
 
         } else if (datalist.get(position).getCoursestatus().equals("已结束")) {
             //holder.cardView.setBackgroundColor(Color.argb(12, 160, 50, 0));
             //holder.cardView.setCardBackgroundColor(Color.argb(221,221,187,0));
             holder.tvcoursestatus.setTextColor(R.color.color_4);
             holder.cardImage.setScaleType(ImageView.ScaleType.FIT_XY);
-            holder.cardImage.setImageResource(R.mipmap.icon_error);
+            holder.cardImage.setImageResource(R.mipmap.ic_end);
         } else {
             //holder.cardView.setCardBackgroundColor(Color.argb(255,214,153,0));
+            Log.e("Flag",datalist.get(position).getCoursestatus());
             holder.tvcoursestatus.setTextColor(R.color.color_7);
-            holder.cardImage.setImageResource(R.mipmap.icon_wait);
+            holder.cardImage.setImageResource(R.mipmap.ic_wait);
         }
 
         holder.tvcoursenum.setText(datalist.get(position).getCoursenum());

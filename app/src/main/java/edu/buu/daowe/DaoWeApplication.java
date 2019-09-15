@@ -24,6 +24,15 @@ import okhttp3.OkHttpClient;
 public class DaoWeApplication extends Application {
 
     public boolean qdflag = false;
+    private String realName;
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
 
     public ArrayList getJctime() {
         if (jctime == null) {

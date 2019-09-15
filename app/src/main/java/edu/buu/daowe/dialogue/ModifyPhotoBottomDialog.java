@@ -20,6 +20,7 @@ import edu.buu.daowe.Util.BosUtils;
 public class ModifyPhotoBottomDialog extends DialogFragment {
 
 
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

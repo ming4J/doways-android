@@ -3,8 +3,11 @@ package edu.buu.daowe.fragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.NavigationView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +29,7 @@ import java.util.Map;
 
 import edu.buu.daowe.R;
 import edu.buu.daowe.Util.MyTimeUtils;
+import edu.buu.daowe.activity.MainActivity;
 import edu.buu.daowe.activity.memo.EditActivity;
 import edu.buu.daowe.http.BaseRequest;
 import okhttp3.Call;
@@ -33,15 +37,17 @@ import okhttp3.Call;
 public class SchooClalendarFragment extends BaseFragment implements
         CalendarView.OnCalendarSelectListener,
         CalendarView.OnYearChangeListener, CalendarView.OnCalendarLongClickListener,
-        View.OnClickListener {
+        View.OnClickListener{
     int[] color = {0xFF40db25, 0xff00CED1, 0xff00BFFF, 0xff1E90FF, 0xff4169E1, 0xff0000CD, 0xff8A2BE2, 0xff9400D3};
     TextView mTextMonthDay;
     Map<String, Calendar> map;
     TextView mTextYear;
-
+    MainActivity mainActivity;
     TextView mTextLunar;
-
+    NavigationView transNavigationView;
+    NavigationView noteNavigationView;
     TextView mTextCurrentDay;
+
 
     CalendarView mCalendarView;
 
@@ -59,14 +65,18 @@ public class SchooClalendarFragment extends BaseFragment implements
 
     @Override
     protected void initView() {
-
         setStatusBarDarkMode();
         mTextMonthDay = getView().findViewById(R.id.tv_month_day);
         mTextYear = getView().findViewById(R.id.tv_year);
         mTextLunar = getView().findViewById(R.id.tv_lunar);
+        transNavigationView = getView().findViewById(R.id.cala_stu_trans);
+        noteNavigationView = getView().findViewById(R.id.cala_note);
         mRelativeTool = getView().findViewById(R.id.rl_tool);
         mCalendarView = getView().findViewById(R.id.calendarView);
         mTextCurrentDay = getView().findViewById(R.id.tv_current_day);
+        transNavigationView.setItemIconTintList(null);
+        noteNavigationView.setItemIconTintList(null);
+        mainActivity= (MainActivity) this.getActivity();
         mTextMonthDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +118,20 @@ public class SchooClalendarFragment extends BaseFragment implements
         mTextMonthDay.setText(mCalendarView.getCurMonth() + "月" + mCalendarView.getCurDay() + "日");
         mTextLunar.setText("今日");
         mTextCurrentDay.setText(String.valueOf(mCalendarView.getCurDay()));
+        transNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                mainActivity.onNavigationItemSelected(menuItem);
+                return true;
+            }
+        });
+        noteNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                mainActivity.onNavigationItemSelected(menuItem);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -137,18 +161,19 @@ public class SchooClalendarFragment extends BaseFragment implements
 
                             int weekNumber = datalist.getJSONObject(i).getInt("weekNumber");
                             LocalDateTime startTime = MyTimeUtils.getDateTimeOfTimestamp(datalist.getJSONObject(i).getLong("startTime"));
+                            startTime=startTime.plusDays(1L);
                             LocalDateTime endTime = MyTimeUtils.getDateTimeOfTimestamp(datalist.getJSONObject(i).getLong("endTime"));
                             //   Log.e("dddddddd", startTime.getDayOfYear() + " end" + endTime.getDayOfYear());
                             int starttime = startTime.getDayOfYear();
                             int endtime = endTime.getDayOfYear();
-                            int colorindex = 0;
+                            //int colorindex = 0;
                             while (starttime < endtime - 1) {
 
-                                map.put(getSchemeCalendar(year, startTime.getMonthValue(), startTime.getDayOfMonth(), color[colorindex], "第" + weekNumber + "周").toString(),
-                                        getSchemeCalendar(year, startTime.getMonthValue(), startTime.getDayOfMonth(), color[colorindex], "第" + weekNumber + "周"));
+                                map.put(getSchemeCalendar(year, startTime.getMonthValue(), startTime.getDayOfMonth(), color[i], "第" + weekNumber + "周").toString(),
+                                        getSchemeCalendar(year, startTime.getMonthValue(), startTime.getDayOfMonth(), color[i], "第" + weekNumber + "周"));
                                 starttime++;
                                 startTime = startTime.plusDays(1);
-                                colorindex++;
+                                //colorindex++;
 
 
                             }

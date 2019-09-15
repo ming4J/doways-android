@@ -30,8 +30,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidubce.services.bos.BosClient;
@@ -60,14 +58,13 @@ import edu.buu.daowe.DaoWeApplication;
 import edu.buu.daowe.R;
 import edu.buu.daowe.Util.BosUtils;
 import edu.buu.daowe.Util.BottomNavigationViewHelper;
-import edu.buu.daowe.dialogue.ModifyPhotoBottomDialog;
 import edu.buu.daowe.fragment.ApplicateFragment;
 import edu.buu.daowe.fragment.CardShowClassFragment;
-import edu.buu.daowe.fragment.CheckInFragment;
+import edu.buu.daowe.fragment.CardShowClassNoCourse;
 import edu.buu.daowe.fragment.DestoryinFragment;
 import edu.buu.daowe.fragment.MemoFragment;
 import edu.buu.daowe.fragment.SchooClalendarFragment;
-import edu.buu.daowe.fragment.Three_Fragment;
+import edu.buu.daowe.fragment.SigninAnysFragment;
 import edu.buu.daowe.fragment.UserCenter_Fragment;
 import edu.buu.daowe.http.BaseRequest;
 import okhttp3.Call;
@@ -85,11 +82,11 @@ public class MainActivity extends AppCompatActivity
     long mBackPressed;
     private Menu menuNav;
 
-    TextView tvusername, tvsign;
-    ImageView img, imguserphoto;
+    //TextView tvusername, tvsign;
+   // ImageView img, imguserphoto;
     DaoWeApplication app;
     JSONObject userinfo;
-    NavigationView navigationView;
+   // NavigationView navigationView;
     private List<NoteBean> noteList;
     public static String TAG = "MainActivity";
     InputStream inputStream, myinputstream = null;
@@ -107,7 +104,6 @@ public class MainActivity extends AppCompatActivity
         mybar = findViewById(R.id.mybar);
         fragmanager = getSupportFragmentManager();
 
-
         userdao = new UserDao(this);
 
         //   transaction.replace(R.id.main_frame,new CheckInFragment()).commit();
@@ -118,8 +114,8 @@ public class MainActivity extends AppCompatActivity
         noteDao = new NoteDao(this);
         bottom_menu_kcb = findViewById(R.id.menu_classtable);
         bottom_menu_xl = findViewById(R.id.menu_calendar);
-        bottom_menu_qz = findViewById(R.id.menu_message);
-
+        //bottom_menu_qz = findViewById(R.id.menu_message);
+       // navigationView= findViewById(R.id.nav_view);
         initBottomNavigation();
 
         initData();
@@ -133,21 +129,19 @@ public class MainActivity extends AppCompatActivity
 //            }
 //        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.setItemIconTintList(null);
-        tvusername = navigationView.getHeaderView(0).findViewById(R.id.nav_username);
-        tvsign = navigationView.getHeaderView(0).findViewById(R.id.nav_sign);
-        imguserphoto = navigationView.getHeaderView(0).findViewById(R.id.userimg);
-        imguserphoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fm = getSupportFragmentManager();
-                ModifyPhotoBottomDialog editNameDialog = new ModifyPhotoBottomDialog();
-                editNameDialog.show(fm, "fragment_bottom_dialog");
-            }
-        });
-        Log.e(TAG, app.getUsername() + "   " + app.getToken());
-
+       // tvusername = navigationView.getHeaderView(0).findViewById(R.id.nav_username);
+       // tvsign = navigationView.getHeaderView(0).findViewById(R.id.nav_sign);
+       // imguserphoto = navigationView.getHeaderView(0).findViewById(R.id.userimg);
+//        imguserphoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                FragmentManager fm = getSupportFragmentManager();
+//                ModifyPhotoBottomDialog editNameDialog = new ModifyPhotoBottomDialog();
+//                editNameDialog.show(fm, "fragment_bottom_dialog");
+//            }
+//        });
+//        Log.e(TAG, app.getUsername() + "   " + app.getToken());
+//
         OkHttpUtils.get().addHeader("Authorization", "Bearer " + app.getToken()).url(BaseRequest.BASEURL + "users/" + app.getUsername()).build().execute(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -162,8 +156,8 @@ public class MainActivity extends AppCompatActivity
                     if (userinfo.getInt("code") == 200) {
                         userinfo = userinfo.getJSONObject("data");
                         app.setStuid(userinfo.getString("id"));
-                        tvsign.setText(userinfo.getString("introduction"));
-                        tvusername.setText(userinfo.getString("name"));
+                       // tvsign.setText(userinfo.getString("introduction"));
+                        app.setRealName(userinfo.getString("name"));
                         setCount();
                         //https://i.loli.net/2019/08/18/VwGi1O8pnN5xljA.jpg   userinfo.getString("avatar")
                         OkHttpUtils.get().url(userinfo.getString("avatar")).build().execute(new BitmapCallback() {
@@ -174,7 +168,7 @@ public class MainActivity extends AppCompatActivity
 
                             @Override
                             public void onResponse(Bitmap response, int id) {
-                                imguserphoto.setImageBitmap(response);
+                                //imguserphoto.setImageBitmap(response);
                             }
                         });
 
@@ -188,22 +182,22 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        img = navigationView.getHeaderView(0).findViewById(R.id.pic_header);
-        img.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                img.setImageResource(R.mipmap.nav_header2);
-
-                return true;
-            }
-
-        });
+        //img = navigationView.getHeaderView(0).findViewById(R.id.pic_header);
+//        img.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                img.setImageResource(R.mipmap.nav_header2);
+//
+//                return true;
+//            }
+//
+//        });
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+        //navigationView.setNavigationItemSelectedListener(this);
         if(app.getSpf().getString("guide","") !=null &&app.getSpf().getString("guide","").equals("finished")){
 
         }else{
@@ -241,20 +235,23 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        mFragments.add(new Three_Fragment());
+       // mFragments.add(new Three_Fragment());
         mFragments.add(new SchooClalendarFragment());
-
+        mFragments.add(new CardShowClassNoCourse());
+       // mFragments.add(new UserCenter_Fragment());
         mFragments.add(new CardShowClassFragment());
         mFragments.add(new UserCenter_Fragment());
-        mFragments.add(new CheckInFragment());
-        mFragments.add(new CheckInFragment());
+       //mFragments.add(new CheckInFragment());
+       // mFragments.add(new CheckInFragment());
         mFragments.add(new ApplicateFragment());
         mFragments.add(new DestoryinFragment());
+        mFragments.add(new SigninAnysFragment());
         // mFragments.add(new CancellationFragment());
         // mFragments.add(new AccountFragment());
         // 初始化展示MessageFragment
         mybar.setVisibility(View.VISIBLE);
-        toolbar.setVisibility(View.VISIBLE);
+//        toolbar.setVisibility(View.VISIBLE);
+        Log.e("List",mFragments.toString());
         setFragmentPosition(5);
     }
 
@@ -267,27 +264,21 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.menu_message:
-                        mybar.setVisibility(View.VISIBLE);
-                        toolbar.setVisibility(View.VISIBLE);
-                        setFragmentPosition(3);
-                        setTitle("朋友圈");
-                        break;
                     case R.id.menu_calendar:
                         mybar.setVisibility(View.VISIBLE);
                         toolbar.setVisibility(View.VISIBLE);
-                        setFragmentPosition(4);
+                        setFragmentPosition(3);
                         setTitle("校历");
                         break;
                     case R.id.menu_classtable:
                         mybar.setVisibility(View.VISIBLE);
-                        toolbar.setVisibility(View.VISIBLE);
+                       // toolbar.setVisibility(View.VISIBLE);
                         setFragmentPosition(5);
                         setTitle("今日课表");
                         break;
                     case R.id.menu_me:
                         mybar.setVisibility(View.GONE);
-                        toolbar.setVisibility(View.GONE);
+                    //    toolbar.setVisibility(View.GONE);
                         setFragmentPosition(6);
                         setTitle("个人中心");
                         break;
@@ -367,22 +358,26 @@ public class MainActivity extends AppCompatActivity
 //            transaction = fragmanager.beginTransaction();
 //        transaction.replace(R.id.main_frame,new CheckInFragment()).commit();
             mybar.setVisibility(View.VISIBLE);
-            toolbar.setVisibility(View.VISIBLE);
+          //  toolbar.setVisibility(View.VISIBLE);
             Intent it = new Intent(MainActivity.this, CameraSignInActivity.class);
             startActivity(it);
 
-        } else if (id == R.id.nav_cancellation) {
+        } else if (id == R.id.cala_log) {
 //            transaction = fragmanager.beginTransaction();
 //            transaction.replace(R.id.main_frame,new CancellationFragment()).commit();
             mybar.setVisibility(View.VISIBLE);
             toolbar.setVisibility(View.VISIBLE);
             setTitle("查看请假记录");
-            setFragmentPosition(10);
-
+            setFragmentPosition(8);
+        }else if (id == R.id.cala_anys){
+            mybar.setVisibility(View.VISIBLE);
+            toolbar.setVisibility(View.VISIBLE);
+            setTitle("考勤分析");
+            setFragmentPosition(9);
 
         } else if (id == R.id.nav_logout) {
             mybar.setVisibility(View.VISIBLE);
-            toolbar.setVisibility(View.VISIBLE);
+       //     toolbar.setVisibility(View.VISIBLE);
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -405,7 +400,7 @@ public class MainActivity extends AppCompatActivity
             }).start();
 
 
-        } else if (id == R.id.nav_all) {
+        } else if (id == R.id.cala_all) {
             mybar.setVisibility(View.VISIBLE);
             toolbar.setVisibility(View.VISIBLE);
             nav_selected = 3;
@@ -415,34 +410,34 @@ public class MainActivity extends AppCompatActivity
 
 
             // setFragmentPosition(5);
-            setTitle("备忘录——全部");
+            setTitle("全部备忘录");
 
-        } else if (id == R.id.nav_finish) {
+        } else if (id == R.id.cala_finish) {
             mybar.setVisibility(View.VISIBLE);
             toolbar.setVisibility(View.VISIBLE);
             nav_selected = 1;
             refreshNoteList(app.getStuid(), nav_selected);
             setFragmentPosition(1);
-            setTitle("备忘录——已完成");
+            setTitle("已完成备忘录");
 
-        } else if (id == R.id.nav_unfinish) {
+        } else if (id == R.id.cala_unfinish) {
             nav_selected = 0;
             refreshNoteList(app.getStuid(), nav_selected);
 
             setFragmentPosition(2);
-            setTitle("备忘录——未完成");
+            setTitle("未完成备忘录");
 
         }
-        else if (id == R.id.nav_appjq){
+        else if (id == R.id.cala_cancellation){
             mybar.setVisibility(View.VISIBLE);
             toolbar.setVisibility(View.VISIBLE);
             setTitle("请假");
-            setFragmentPosition(9);
+            setFragmentPosition(7);
         }
 
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+    //    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -452,8 +447,8 @@ public class MainActivity extends AppCompatActivity
         public void handleMessage(Message message) {
 
             Bitmap bitmap = (Bitmap) message.obj;
-            imguserphoto.setImageBitmap(bitmap);
-
+            //imguserphoto.setImageBitmap(bitmap);
+            setFragmentPosition(6);
 
         }
     };
@@ -461,7 +456,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, final int resultCode, @Nullable final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+    final long timenow = System.currentTimeMillis();
         if (resultCode == -1) {
             final String key = app.getUsername();
             inputStream = null;
@@ -482,7 +477,7 @@ public class MainActivity extends AppCompatActivity
                         // 以数据流形式上传Object
                         ObjectMetadata objectMetadata = new ObjectMetadata();
                         objectMetadata.setContentType("image/jpeg");
-                        PutObjectRequest request = new PutObjectRequest("doways-avatar", key + ".jpg", inputStream, objectMetadata);
+                        PutObjectRequest request = new PutObjectRequest("doways-avatar", key +"-"+timenow+ ".jpg", inputStream, objectMetadata);
                         request.setObjectMetadata(objectMetadata);
 
                         request.setProgressCallback(new BosProgressCallback<PutObjectRequest>() {
@@ -504,7 +499,7 @@ public class MainActivity extends AppCompatActivity
 
                                     try {
                                         final JSONObject object = new JSONObject();
-                                        object.put("avatar", BaseRequest.BASEBOS + app.getUsername() + ".jpg");
+                                        object.put("avatar", BaseRequest.BASEBOS + app.getUsername()+"-"+timenow + ".jpg");
                                         Log.e(TAG, object.toString());
                                         OkHttpUtils.patch().addHeader("Authorization", "Bearer " + app.getToken())
                                                 .requestBody(new RequestBody() {
@@ -585,21 +580,21 @@ public class MainActivity extends AppCompatActivity
             cursor.close();
 
         }
-        menuNav = navigationView.getMenu();
+        //menuNav = navigationView.getMenu();
         int unfinishNum = noteDao.countType(app.getStuid(), 0);//未完成备忘录
         int finishNum = noteDao.countType(app.getStuid(), 1);//已完成备忘录
         int allNum = finishNum + unfinishNum;//所有备忘录
-        MenuItem nav_all = menuNav.findItem(R.id.nav_all);
-        MenuItem nav_finish = menuNav.findItem(R.id.nav_finish);
-        MenuItem nav_unfinish = menuNav.findItem(R.id.nav_unfinish);
+//        MenuItem nav_all = menuNav.findItem(R.id.nav_all);
+ //       MenuItem nav_finish = menuNav.findItem(R.id.nav_finish);
+  //      MenuItem nav_unfinish = menuNav.findItem(R.id.nav_unfinish);
 
         String all_before = "所有备忘录";
         String finish_before = "已完成备忘录";
         String unfinish_before = "未完成备忘录";
 
-        nav_all.setTitle(setSpanTittle(all_before, allNum));
-        nav_finish.setTitle(setSpanTittle(finish_before, finishNum));
-        nav_unfinish.setTitle(setSpanTittle(unfinish_before, unfinishNum));
+    //    nav_all.setTitle(setSpanTittle(all_before, allNum));
+     //   nav_finish.setTitle(setSpanTittle(finish_before, finishNum));
+     //   nav_unfinish.setTitle(setSpanTittle(unfinish_before, unfinishNum));
 
     }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,10 @@ public class ItemView extends LinearLayout {
 
         leftTitle.setText(ta.getString(R.styleable.ItemView_left_text));//设置左侧标题文字
         rightDesc.setText(ta.getString(R.styleable.ItemView_right_text));//设置右侧文字描述
+        rightDesc.setEllipsize(TextUtils.TruncateAt.END);
+        rightDesc.setSingleLine(true);
+        rightDesc.setMaxLines(1);
+        rightDesc.setMaxEms(15);
 
         rightArrow.setVisibility(isShowRightArrow ? View.VISIBLE : View.INVISIBLE);//设置右侧箭头图标是否显示
         bottomLine.setVisibility(isShowBottomLine ? View.VISIBLE : View.INVISIBLE);//设置底部图标是否显示
