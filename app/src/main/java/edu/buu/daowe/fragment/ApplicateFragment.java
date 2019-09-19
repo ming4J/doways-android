@@ -189,7 +189,12 @@ public class ApplicateFragment extends Fragment implements View.OnFocusChangeLis
 
                                                                     @Override
                                                                     public void onResponse(String response, int id) {
-                                                                        Log.e("tagtagtag", response);
+                                                                        try {
+                                                                            JSONObject getdata = new JSONObject(response);
+                                                                            Toast.makeText(getActivity(), getdata.getString("msg"), Toast.LENGTH_SHORT).show();
+                                                                        } catch (JSONException e) {
+                                                                            e.printStackTrace();
+                                                                        }
                                                                     }
                                                                 });
                                                             }

@@ -367,7 +367,7 @@ public class MainActivity extends AppCompatActivity
 //            transaction.replace(R.id.main_frame,new CancellationFragment()).commit();
             mybar.setVisibility(View.VISIBLE);
             toolbar.setVisibility(View.VISIBLE);
-            setTitle("查看请假记录");
+            setTitle("查看记录");
             setFragmentPosition(8);
         }else if (id == R.id.cala_anys){
             mybar.setVisibility(View.VISIBLE);
@@ -634,13 +634,13 @@ public class MainActivity extends AppCompatActivity
         TipData tipData1 = new TipData(R.mipmap.guide_kcb, Gravity.LEFT | Gravity.TOP, (View) bottom_menu_kcb);
         tipData1.setLocation(bottom_menu_kcb.getWidth() + 15, bottom_menu_kcb.getHeight());
         TipData tipData2 = new TipData(R.mipmap.guide_xl, Gravity.CENTER | Gravity.TOP, (View) bottom_menu_xl);
-        tipData2.setLocation(bottom_menu_kcb.getWidth() + 60, bottom_menu_xl.getHeight());
-        TipData tipData3 = new TipData(R.mipmap.guide_pyq, Gravity.CENTER | Gravity.TOP, (View) bottom_menu_qz);
+       // tipData2.setLocation(bottom_menu_kcb.getWidth() + 60, bottom_menu_xl.getHeight());
+        //TipData tipData3 = new TipData(R.mipmap.guide_pyq, Gravity.CENTER | Gravity.TOP, (View) bottom_menu_qz);
         // tipData3.setLocation(bottom_menu_kcb.getWidth()+80, bottom_menu_qz.getHeight());
 
         guideHelper.addPage(tipData1);
         guideHelper.addPage(tipData2);
-        guideHelper.addPage(tipData3);
+        //guideHelper.addPage(tipData3);
 
 
         tipData1.setOnClickListener(new View.OnClickListener() {

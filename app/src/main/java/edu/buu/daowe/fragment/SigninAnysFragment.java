@@ -51,8 +51,9 @@ public class SigninAnysFragment extends Fragment {
         pieView = getView().findViewById(R.id.pie_view);
         List<PieEntry> list = new ArrayList<>();
         list.add(new PieEntry(90,"正常"));
-        list.add(new PieEntry(3,"旷课",true));
-        list.add(new PieEntry(1,"病假"));
+        list.add(new PieEntry(1,"旷课",true));
+        list.add(new PieEntry(2,"事假",true));
+        list.add(new PieEntry(1,"病假",true));
         list.add(new PieEntry(6,"迟到",true));
         pieView.setData(list)
                 .setAnimatorDuration(2000)

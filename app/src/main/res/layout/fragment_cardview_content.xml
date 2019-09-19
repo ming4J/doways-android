@@ -165,7 +165,7 @@
                         android:layout_marginRight="10dp"
                         android:text="刘建国"
                         android:textColor="@color/pure_black"
-                        android:textSize="14dp" />
+                        android:textSize="12dp" />
                 </LinearLayout>
 
             </LinearLayout>

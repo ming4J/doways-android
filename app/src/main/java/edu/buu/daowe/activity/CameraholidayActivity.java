@@ -184,7 +184,7 @@ public class CameraholidayActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(CameraholidayActivity.this, "66666", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(CameraholidayActivity.this, "66666", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(CameraholidayActivity.this, MainActivity.class);
                         Bundle bundle = new Bundle();
                         //  bundle.putParcelable("bitmap", bm);

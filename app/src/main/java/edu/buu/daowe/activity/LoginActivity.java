@@ -35,6 +35,7 @@ import org.json.JSONObject;
 
 import edu.buu.daowe.DaoWeApplication;
 import edu.buu.daowe.R;
+import edu.buu.daowe.Util.NetworkCheck;
 import edu.buu.daowe.http.BaseRequest;
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -77,6 +78,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         spf = app.getSpf();
         //申请动态权限的列表
          String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE
+                 ,Manifest.permission.ACCESS_NETWORK_STATE
+                 ,Manifest.permission.INTERNET
                  ,Manifest.permission.READ_EXTERNAL_STORAGE
                  ,Manifest.permission.INTERNET
                  ,Manifest.permission.BLUETOOTH_PRIVILEGED
@@ -473,41 +476,44 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        OkHttpUtils.postString().content(dataob.toString()).mediaType(MediaType.parse("application/json; charset=utf-8"))
-                .url(BaseRequest.BASEURL + "auth").build().execute(new StringCallback() {
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                Toast.makeText(LoginActivity.this, "用户名或密码输入错误，请重新检查！", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                if (cbauto.isChecked() == true) {
-                    app.getEditor().putString("AUTOLOGIN", "true").putString("username", mEtLoginUsername.getText().toString()).putString("password", mEtLoginPwd.getText().toString()).commit();
-
-                } else {
-                    app.getEditor().putString("AUTOLOGIN", "true").commit();
+        if (NetworkCheck.checkNetwork(getBaseContext())) {
+            OkHttpUtils.postString().content(dataob.toString()).mediaType(MediaType.parse("application/json; charset=utf-8"))
+                    .url(BaseRequest.BASEURL + "auth").build().execute(new StringCallback() {
+                @Override
+                public void onError(Call call, Exception e, int id) {
+                    Toast.makeText(LoginActivity.this, "用户名或密码输入错误，请重新检查！", Toast.LENGTH_SHORT).show();
                 }
-                try {
-                    JSONObject rep = new JSONObject(response);
-                    if (rep.getInt("code") == 200) {
-                        Toast.makeText(LoginActivity.this, "欢迎回来！", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        app.setUsername(mEtLoginUsername.getText().toString());
-                        app.setToken(rep.getString("data"));
-                        overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
-                        finish();
+
+                @Override
+                public void onResponse(String response, int id) {
+                    if (cbauto.isChecked() == true) {
+                        app.getEditor().putString("AUTOLOGIN", "true").putString("username", mEtLoginUsername.getText().toString()).putString("password", mEtLoginPwd.getText().toString()).commit();
+
                     } else {
-                        Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
-
+                        app.getEditor().putString("AUTOLOGIN", "true").commit();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                    try {
+                        JSONObject rep = new JSONObject(response);
+                        if (rep.getInt("code") == 200) {
+                            Toast.makeText(LoginActivity.this, "欢迎回来！", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            app.setUsername(mEtLoginUsername.getText().toString());
+                            app.setToken(rep.getString("data"));
+                            overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
 
-            }
-        });
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+        }else {
+            Toast.makeText(LoginActivity.this, "请检查网络连接！", Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -518,6 +524,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+
+
 
     //微博登录
     private void weiboLogin() {

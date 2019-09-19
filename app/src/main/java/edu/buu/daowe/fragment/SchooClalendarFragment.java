@@ -161,7 +161,6 @@ public class SchooClalendarFragment extends BaseFragment implements
 
                             int weekNumber = datalist.getJSONObject(i).getInt("weekNumber");
                             LocalDateTime startTime = MyTimeUtils.getDateTimeOfTimestamp(datalist.getJSONObject(i).getLong("startTime"));
-                            startTime=startTime.plusDays(1L);
                             LocalDateTime endTime = MyTimeUtils.getDateTimeOfTimestamp(datalist.getJSONObject(i).getLong("endTime"));
                             //   Log.e("dddddddd", startTime.getDayOfYear() + " end" + endTime.getDayOfYear());
                             int starttime = startTime.getDayOfYear();
